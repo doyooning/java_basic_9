@@ -33,8 +33,15 @@ public class PrimitiveEqualType {
         arr1[0] = 1;
         arr1[2] = 3;
         System.out.println("===============");
-
+        // iter 자동완성
         for (int i : arr1) {
+            System.out.println(i);
+        }
+
+        System.out.println("===============");
+        // itar 자동완성
+        for (int i = 0; i < arr1.length; i++) {
+            int i1 = arr1[i];
             System.out.println(i);
         }
     }
