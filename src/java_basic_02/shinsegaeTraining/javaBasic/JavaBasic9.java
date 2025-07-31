@@ -6,6 +6,8 @@ public class JavaBasic9 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int sNum = 0;
+        int max = 0;
+        int sum = 0;
 
         Contents:
         while (true) {
@@ -14,9 +16,8 @@ public class JavaBasic9 {
             System.out.println("----------------------------------------------------");
             System.out.print("선택> ");
             int n = sc.nextInt();
-            int max = 0;
-            int sum = 0;
             int[] scores = new int[sNum];
+
             switch (n) {
                 case 1:
                     System.out.print("학생수> ");
@@ -24,7 +25,7 @@ public class JavaBasic9 {
                     break;
                 case 2:
                     for (int i = 0; i < sNum; i++) {
-                        System.out.printf("scores[%d]>\n", i);
+                        System.out.printf("scores[%d]> ", i);
                         int scoreInput = sc.nextInt();
                         scores[i] = scoreInput;
                         sum += scoreInput;
