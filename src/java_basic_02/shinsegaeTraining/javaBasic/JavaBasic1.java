@@ -18,8 +18,6 @@ public class JavaBasic1 {
             default -> {
                 score1 = 60;
             }
-
         }
-
     }
 }
