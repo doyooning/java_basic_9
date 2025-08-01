@@ -1,4 +1,4 @@
-package java_basic_02.shinsegaeTraining.javaBasic;
+package java_basic_02.shinsegaeTraining.test.loop_array;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

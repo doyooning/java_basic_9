@@ -1,4 +1,4 @@
-package java_basic_02.shinsegaeTraining.javaBasic;
+package java_basic_02.shinsegaeTraining.test.loop_array;
 
 public class JavaBasic4 {
     public static void main(String[] args) {
