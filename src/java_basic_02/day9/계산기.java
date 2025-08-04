@@ -7,14 +7,13 @@ public class 계산기 {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-
         while (status) {
             menu();
 
             String inputData = sc.nextLine();
-            String[] data = inputData.split(" ");
+            int[] intDataArr = setIntDataArr(inputData);
 
-            calculator(data);
+            calculator(intDataArr);
         }
     }
 
@@ -27,12 +26,26 @@ public class 계산기 {
         System.out.println("두 수를 차례로 입력하고 수행할 사칙연산의 메뉴 숫자를 입력해 주세요.");
     }
 
-    public static void calculator(String[] data) {
+    public static int[] setIntDataArr(String inputData) {
         try {
-            int n1, n2, menuNum = 0;
-            n1 = Integer.parseInt(data[0]);
-            n2 = Integer.parseInt(data[1]);
-            menuNum = Integer.parseInt(data[2]);
+            String[] StringDataArr = inputData.split(" ");
+            int data1 = Integer.parseInt(StringDataArr[0]);
+            int data2 = Integer.parseInt(StringDataArr[1]);
+            int data3 = Integer.parseInt(StringDataArr[2]);
+            return new int[]{data1, data2, data3};
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public static void calculator(int[] intDataArr) {
+        if (intDataArr == null) {
+            System.out.println("숫자만 입력해주십시오.");
+        } else {
+            int n1, n2, menuNum;
+            n1 = intDataArr[0];
+            n2 = intDataArr[1];
+            menuNum = intDataArr[2];
 
             switch (menuNum) {
                 case 1:
@@ -52,10 +65,6 @@ public class 계산기 {
                 default:
                     System.out.println("유효한 숫자를 입력해주십시오.");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("숫자만 입력해주십시오.");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("순서대로 숫자를 전부 입력해주십시오.");
         }
     }
 
@@ -70,7 +79,8 @@ public class 계산기 {
         System.out.println();
         System.out.println("결과는");
         System.out.printf("%d - %d = %d\n", n1, n2, n1 - n2);
-        System.out.println();    }
+        System.out.println();
+    }
 
     public static void multi(int n1, int n2) {
         System.out.println();
