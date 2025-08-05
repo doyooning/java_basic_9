@@ -7,4 +7,12 @@ public class Member {
     public String email;
     public String address;
     public double weight;
+
+    private static final Member member = new Member();
+
+    public static Member getInstance() {
+        return member;
+    }
+
+
 }

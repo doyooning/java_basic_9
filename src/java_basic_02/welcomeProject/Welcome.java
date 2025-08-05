@@ -15,6 +15,7 @@ public class Welcome {
         String userMobile = sc.nextLine();
 
         Guest guest = new Guest(userName, userMobile);
+        Cart cart = new Cart();
         BookList bookList = new BookList();
 
         while (status) {
@@ -27,10 +28,10 @@ public class Welcome {
                     menuGuestInfo(guest);
                     break;
                 case 2:
-                    menuCartItemList(guest);
+                    menuCartItemList(cart);
                     break;
                 case 3:
-                    menuCartClear(guest);
+                    menuCartClear(cart);
                     break;
                 case 4:
                     System.out.println("바구니 항목 추가하기");
@@ -58,6 +59,7 @@ public class Welcome {
         }
     }
 
+
     // 메뉴 정보 출력
     public static void menuIntroduction() {
         System.out.println("*****************************************************************");
@@ -78,19 +80,19 @@ public class Welcome {
     }
 
     // 2. 장바구니 상품 목록 보기
-    public static void menuCartItemList(Guest guest) {
-        if (guest.cartItems == null) {
+    public static void menuCartItemList(Cart cart) {
+        if (cart.cartItems == null) {
             System.out.println("장바구니가 비었습니다.");
         } else {
-            for (int i = 0; i < guest.cartItems.length; i++) {
-                System.out.println(guest.cartItems[i]);
+            for (int i = 0; i < cart.cartItems.length; i++) {
+                System.out.println(cart.cartItems[i]);
             }
         }
     }
 
     // 3. 장바구니 비우기
-    public static void menuCartClear(Guest guest) {
-        guest.cartItems = null;
+    public static void menuCartClear(Cart cart) {
+        cart.cartItems = null;
         System.out.println("장바구니를 비웠습니다.");
     }
 
@@ -104,6 +106,7 @@ public class Welcome {
         }
         System.out.print("장바구니에 추가할 도서의 ID를 입력하세요 : ");
         String inputID = sc.nextLine();
+
         System.out.println("장바구니에 추가하겠습니까? Y | N");
         String confirm = sc.nextLine();
         if (confirm.equalsIgnoreCase("Y")) {

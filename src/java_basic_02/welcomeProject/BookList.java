@@ -8,8 +8,6 @@ public class BookList {
     String[][] book = new String[NUM_BOOK][NUM_ITEM];
 
     public BookList() {
-
-
         book[0][0] = "ISBN1235";
         book[0][1] = "안드로이드 프로그래밍";
         book[0][2] = "33000";
