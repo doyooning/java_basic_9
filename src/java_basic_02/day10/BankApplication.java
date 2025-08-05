@@ -13,39 +13,38 @@ public class BankApplication {
         while (status) {
             try {
                 menu();
-
                 int menuNum = Integer.parseInt(sc.nextLine());
                 switch (menuNum) {
                     case 1:
                         System.out.print("""
-                            ----------
-                            계좌생성
-                            ----------
-                            """);
+                                ----------
+                                계좌생성
+                                ----------
+                                """);
                         createAccount();
                         break;
                     case 2:
                         System.out.print("""
-                            ----------
-                            계좌목록
-                            ----------
-                            """);
+                                ----------
+                                계좌목록
+                                ----------
+                                """);
                         printAccList();
                         break;
                     case 3:
                         System.out.print("""
-                            ----------
-                            예금
-                            ----------
-                            """);
+                                ----------
+                                예금
+                                ----------
+                                """);
                         deposit();
                         break;
                     case 4:
                         System.out.print("""
-                            ----------
-                            출금
-                            ----------
-                            """);
+                                ----------
+                                출금
+                                ----------
+                                """);
                         withdraw();
                         break;
                     case 5:
@@ -62,6 +61,7 @@ public class BankApplication {
         }
 
     }
+
     // menu 생성
     public static void menu() {
         System.out.print("""
@@ -80,6 +80,10 @@ public class BankApplication {
         String accOwner = sc.nextLine();
         System.out.print("초기입금액: ");
         int balance = Integer.parseInt(sc.nextLine());
+        if (balance <= 0) {
+            System.out.println("0보다 큰 금액을 입력하여 주십시오.");
+            return;
+        }
         Account account = new Account(accNum, accOwner, balance);
         accList[accAmount] = account;
         accAmount++;
@@ -100,28 +104,49 @@ public class BankApplication {
 
     // 3. 예금
     public static void deposit() {
+        boolean flag = false;
         System.out.print("계좌번호: ");
         String accNum = sc.nextLine();
         System.out.print("예금액: ");
         int inputDeposit = Integer.parseInt(sc.nextLine());
+        if (inputDeposit <= 0) {
+            System.out.println("0보다 큰 금액을 입력하여 주십시오.");
+            return;
+        }
         for (int i = 0; i < accAmount; i++) {
             if (accList[i].getAccNum().equals(accNum)) {
-                accList[i].setBalance(accList[i].getBalance() + inputDeposit);
+                accList[i].addBalance(inputDeposit);
+                flag = true;
             }
         }
+        if (!flag) {
+            System.out.println("계좌번호를 다시 입력해 주십시오.");
+            return;
+        }
+
         System.out.println("결과: 예금이 성공되었습니다.");
     }
 
     // 4. 출금
     public static void withdraw() {
+        boolean flag = false;
         System.out.print("계좌번호: ");
         String accNum = sc.nextLine();
         System.out.print("출금액: ");
         int inputWithdraw = Integer.parseInt(sc.nextLine());
+        if (inputWithdraw < 0) {
+            System.out.println("0보다 큰 금액을 입력하여 주십시오.");
+            return;
+        }
         for (int i = 0; i < accAmount; i++) {
             if (accList[i].getAccNum().equals(accNum)) {
-                accList[i].setBalance(accList[i].getBalance() - inputWithdraw);
+                accList[i].reduceBalance(inputWithdraw);
+                flag = true;
             }
+        }
+        if (!flag) {
+            System.out.println("계좌번호를 다시 입력해 주십시오.");
+            return;
         }
         System.out.println("결과: 출금이 성공되었습니다.");
     }

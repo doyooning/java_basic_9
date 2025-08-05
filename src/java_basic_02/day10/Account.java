@@ -1,7 +1,6 @@
 package java_basic_02.day10;
 
 public class Account {
-    private static final int MIN_BALANCE = 0;
     private String accNum;
     private String accOwner;
     private int balance;
@@ -24,7 +23,13 @@ public class Account {
         return balance;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public int addBalance(int input) {
+        balance += input;
+        return balance;
+    }
+
+    public int reduceBalance(int input) {
+        balance -= input;
+        return balance;
     }
 }

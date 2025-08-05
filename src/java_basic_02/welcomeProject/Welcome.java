@@ -21,7 +21,7 @@ public class Welcome {
         while (status) {
             menuIntroduction();
             System.out.print("메뉴 번호를 선택해주세요 ");
-            int menuNum = sc.nextInt();
+            int menuNum = Integer.parseInt(sc.nextLine());
 
             switch (menuNum) {
                 case 1:
@@ -62,15 +62,25 @@ public class Welcome {
 
     // 메뉴 정보 출력
     public static void menuIntroduction() {
-        System.out.println("*****************************************************************");
-        System.out.println("                Welcome to Shopping Mall");
-        System.out.println("                Welcome to Book Market!");
-        System.out.println("*****************************************************************");
-        System.out.println("1. 고객 정보 확인하기       4. 바구니에 항목 추가하기");
-        System.out.println("2. 장바구니 상품 목록 보기   5. 장바구니의 항목 수량 줄이기 ");
-        System.out.println("3. 장바구니 비우기          6. 장바구니의 항목 삭제하기");
-        System.out.println("7. 영수증 표시하기          8. 종료");
-        System.out.println("*****************************************************************");
+        System.out.println("""
+                *****************************************************************
+                                Welcome to Shopping Mall
+                                Welcome to Book Market!
+                *****************************************************************
+                1. 고객 정보 확인하기          5. 장바구니의 항목 수량 줄이기
+                2. 장바구니 상품 목록 보기      6. 장바구니의 항목 삭제하기
+                3. 장바구니 비우기             7. 영수증 표시하기
+                4. 장바구니에 항목 추가하기     8. 종료
+                """);
+//        System.out.println("*****************************************************************");
+//        System.out.println("                Welcome to Shopping Mall");
+//        System.out.println("                Welcome to Book Market!");
+//        System.out.println("*****************************************************************");
+//        System.out.println("1. 고객 정보 확인하기       4. 바구니에 항목 추가하기");
+//        System.out.println("2. 장바구니 상품 목록 보기   5. 장바구니의 항목 수량 줄이기 ");
+//        System.out.println("3. 장바구니 비우기          6. 장바구니의 항목 삭제하기");
+//        System.out.println("7. 영수증 표시하기          8. 종료");
+//        System.out.println("*****************************************************************");
     }
 
     // 1. 고객 정보 확인하기
@@ -104,13 +114,34 @@ public class Welcome {
             }
             System.out.println();
         }
-        System.out.print("장바구니에 추가할 도서의 ID를 입력하세요 : ");
-        String inputID = sc.nextLine();
+        boolean quit = false;
 
-        System.out.println("장바구니에 추가하겠습니까? Y | N");
-        String confirm = sc.nextLine();
-        if (confirm.equalsIgnoreCase("Y")) {
-            System.out.println(inputID + " 도서가 장바구니에 추가되었습니다.");
+        while (!quit) {
+            boolean flag = false;
+            System.out.print("장바구니에 추가할 도서의 ID를 입력하세요 : ");
+            String inputID = sc.nextLine();
+            int bookIndex = -1;
+
+            for (int i = 0; i < BookList.NUM_BOOK; i++) {
+                if (inputID.equals(bookList.book[i][0])) {
+                    bookIndex = i;
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (flag) {
+                System.out.println(bookList.book[bookIndex][1] + " 도서를 장바구니에 추가하겠습니까? Y | N");
+                String confirm = sc.nextLine();
+
+                if (confirm.equalsIgnoreCase("Y")) {
+
+                    System.out.println(inputID + " 도서가 장바구니에 추가되었습니다.");
+                }
+                quit = true;
+            } else {
+                System.out.println("다시 입력해 주세요.");
+            }
         }
 
     }
