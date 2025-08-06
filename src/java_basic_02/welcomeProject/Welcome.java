@@ -133,9 +133,8 @@ public class Welcome {
             if (flag) {
                 System.out.println(bookList.book[bookIndex][1] + " 도서를 장바구니에 추가하겠습니까? Y | N");
                 String confirm = sc.nextLine();
-
                 if (confirm.equalsIgnoreCase("Y")) {
-
+                    // todo : 장바구니 추가 로직
                     System.out.println(inputID + " 도서가 장바구니에 추가되었습니다.");
                 }
                 quit = true;
