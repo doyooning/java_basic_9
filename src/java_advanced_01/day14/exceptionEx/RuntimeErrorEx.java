@@ -1,6 +1,4 @@
-package java_basic_02.day14.exceptionEx;
-
-import java.util.Scanner;
+package java_advanced_01.day14.exceptionEx;
 
 public class RuntimeErrorEx {
     public static void main(String[] args) {

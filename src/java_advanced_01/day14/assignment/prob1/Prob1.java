@@ -1,4 +1,4 @@
-package java_basic_02.day14.assignment.prob1;
+package java_advanced_01.day14.assignment.prob1;
 
 import java.util.Scanner;
 

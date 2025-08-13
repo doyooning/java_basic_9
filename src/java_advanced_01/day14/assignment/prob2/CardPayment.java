@@ -1,4 +1,4 @@
-package java_basic_02.day14.assignment.prob2;
+package java_advanced_01.day14.assignment.prob2;
 
 public class CardPayment extends Payment {
     private String cardNumber;

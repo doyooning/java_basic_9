@@ -1,4 +1,4 @@
-package java_basic_02.day15.prob1;
+package java_advanced_01.day15.prob1;
 
 public class CellPhone extends Exception {
     private String model;
