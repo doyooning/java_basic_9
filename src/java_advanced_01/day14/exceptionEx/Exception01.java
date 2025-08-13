@@ -1,4 +1,4 @@
-package java_basic_02.day14.exceptionEx;
+package java_advanced_01.day14.exceptionEx;
 //컴파일 예외 클래스 종류와 처리
 
 /*

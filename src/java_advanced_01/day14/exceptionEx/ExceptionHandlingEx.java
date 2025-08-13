@@ -1,4 +1,4 @@
-package java_basic_02.day14.exceptionEx;
+package java_advanced_01.day14.exceptionEx;
 
 public class ExceptionHandlingEx {
     public static void main(String[] args) {
