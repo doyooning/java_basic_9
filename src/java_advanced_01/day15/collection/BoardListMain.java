@@ -1,11 +1,14 @@
 package java_advanced_01.day15.collection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BoardListMain {
     public static void main(String[] args) {
         List<Board> boardList = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
 
         // 글 하나를 작성하여 게사판에 올립니다
         boardList.add(new Board("컬렉션 학습 첫째날", "쉽지 않네", "kdy"));

@@ -1,7 +1,7 @@
 package java_advanced_01.day15.collection;
 
 public class Board {
-    private String subject; // 그르 제목
+    private String subject; // 글 제목
     private String content; // 내용
     private String writer; // 글쓴이
 
