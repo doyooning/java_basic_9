@@ -27,6 +27,8 @@ public abstract class Payment implements Payable {
     public void pay() throws PayException {
         if (this.getProductPrice() <= 0) {
             throw new PayException("가격이 잘못되었습니다.");
+        } else {
+            System.out.println("현금이 정상적으로 지불되었습니다.\n[ 현금 결제 정보 ]");
         }
     }
 }

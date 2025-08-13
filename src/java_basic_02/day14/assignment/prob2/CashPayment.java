@@ -12,9 +12,9 @@ public class CashPayment extends Payment {
         this.cashReceiptNumber = cashReceiptNumber;
     }
 
+    @Override
     public String toString() {
-        return String.format("현금이 정상적으로 지불되었습니다.\n[ 현금 결제 정보 ]\n" +
-                        "상점명 : %s\n상품명 : %s\n상품가격 : %d\n현금영수증번호 : %s\n",
+        return String.format("상점명 : %s\n상품명 : %s\n상품가격 : %d\n현금영수증번호 : %s\n",
                 this.getShopName(), this.getProductName(), this.getProductPrice(), this.getCashReceiptNumber());
     }
 

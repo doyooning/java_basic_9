@@ -16,9 +16,13 @@ public class CellPhoneMain {
 		
 		myPhone.call( 40 );  //40분간 통화를 한다.
 		myPhone.printBattery();
-		
-		
-		myPhone.call( -20 );  //통화시간이 잘못 입력되었다.
+
+		try {
+			myPhone.call(-20);  //통화시간이 잘못 입력되었다.
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+
 		
 		
 		CellPhone yourPhone = new CellPhone("SCH-600");

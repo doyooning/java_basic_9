@@ -34,7 +34,7 @@ public class CellPhone extends Exception {
         }
     }
 
-    public void charge(int time) {
+    public void charge(int time) throws IllegalArgumentException {
         if (time < 0) {
             throw new IllegalArgumentException("충전시간입력오류");
         }
