@@ -7,9 +7,5 @@ public class BoardMain {
         BoardManager boardManager = new BoardManager();
         BoardExample boardEx = new BoardExample(boardManager);
         boardEx.run();
-
-//        while(boardEx.flag) {
-//            boardEx.list();
-//        }
     }
 }

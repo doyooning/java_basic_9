@@ -8,7 +8,7 @@ public class BoardManager {
     private Map<String, Board> boardMap = new LinkedHashMap<>();
 
     // Singleton 패턴으로 인스턴스는 관리자 계정으로 하나만 생성
-    private static BoardManager boardManagerSingleton = new BoardManager();
+    private static final BoardManager boardManagerSingleton = new BoardManager();
 
     public static BoardManager getInstance() {
         return boardManagerSingleton;
