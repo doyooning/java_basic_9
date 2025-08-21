@@ -242,7 +242,8 @@ public class BoardExample {
     public static void clear() {
         System.out.println("[게시물 전체 삭제]");
         if (checkMenu()) {
-            boardManager.getBoardMap().clear();
+            boardManager.setBoardMap(new LinkedHashMap<>());
+            size = 1;
         }
     }
 
