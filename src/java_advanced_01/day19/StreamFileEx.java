@@ -1,6 +1,5 @@
 package java_advanced_01.day19;
 
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
