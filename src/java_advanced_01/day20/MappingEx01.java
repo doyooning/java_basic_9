@@ -17,10 +17,10 @@ class Student {
 public class MappingEx01 {
     public static void main(String[] args) {
         // 학생 3명 리스트컬렉션 생성
-        List<Student> students = new ArrayList<>();
-        students.add(new Student("John", 90));
-        students.add(new Student("Jake", 100));
-        students.add(new Student("Lisa", 80));
+        List<Student2> students = new ArrayList<>();
+        students.add(new Student2("John", 90));
+        students.add(new Student2("Jake", 100));
+        students.add(new Student2("Lisa", 80));
 
         //학생들의 점수를 stream() 방법으로 출력
         students.stream()
