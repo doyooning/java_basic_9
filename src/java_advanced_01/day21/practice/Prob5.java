@@ -1,4 +1,4 @@
-package java_advanced_01.day21.pratice;
+package java_advanced_01.day21.practice;
 
 import java.io.FileInputStream;
 import java.io.IOException;
