@@ -48,26 +48,25 @@ public class ServerSocketEx01 {
         Thread thread = new Thread() {
             @Override
             public void run() {
-                try {
-                    serverSocket = new ServerSocket(50001);
-                    System.out.println("[서버] 시작됨");
-                    while (true) {
-                        System.out.println("\n[서버] 연결 요청을 기다리는 중");
-                        // 연결 수락
-                        Socket socket = serverSocket.accept();
+            try {
+                serverSocket = new ServerSocket(50001);
+                System.out.println("[서버] 시작됨");
+                while (true) {
+                    System.out.println("\n[서버] 연결 요청을 기다리는 중");
+                    // 연결 수락
+                    Socket socket = serverSocket.accept();
 
-                        // 연결된 클라이언트의 정보 얻기
-                        InetSocketAddress ia = (InetSocketAddress) socket.getRemoteSocketAddress();
-                        System.out.println("[서버] " + ia.getAddress() + ":" + ia.getPort() + "의 연결 수락함");
+                    // 연결된 클라이언트의 정보 얻기
+                    InetSocketAddress ia = (InetSocketAddress) socket.getRemoteSocketAddress();
+                    System.out.println("[서버] " + ia.getAddress() + ":" + ia.getPort() + "의 연결 수락함");
 
-                        // 연결 끊기
-                        socket.close();
-                        System.out.println("[서버] 연결 종료");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    // 연결 끊기
+                    socket.close();
+                    System.out.println("[서버] 연결 종료");
                 }
-
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             }
         };
         thread.start();
