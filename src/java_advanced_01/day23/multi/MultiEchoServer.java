@@ -14,7 +14,6 @@ public class MultiEchoServer {
     private static final ExecutorService POOL = Executors.newCachedThreadPool();
     private static final AtomicInteger CLIENT_SEQ = new AtomicInteger(1);
     private static final HashSet<String> nicknames = new HashSet<>();
-    static ObjectInputStream ois = null;
 
     public static void main(String[] args) {
         System.out.println("[Server] Starting on port " + PORT);
@@ -24,10 +23,12 @@ public class MultiEchoServer {
             POOL.shutdownNow();
         }));
 
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+        try (ServerSocket serverSocket = new ServerSocket(PORT);
+             Socket socket = serverSocket.accept();
+             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())
+        ) {
             while (true) {
-                Socket socket = serverSocket.accept();
-                ois = new ObjectInputStream(socket.getInputStream());
+
                 String str = ois.readUTF();
 //                int id = CLIENT_SEQ.getAndIncrement();
                 System.out.println("[Server] Client#" + str + " connected from " + socket.getRemoteSocketAddress());
