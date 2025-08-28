@@ -38,20 +38,15 @@ public class StudentInput {
                 System.out.println(obj);
             }
             ois.close();
-        } catch (FileNotFoundException e) {
+
+        } catch (FileNotFoundException e) { // 파일 없으면 만들기
             System.out.println(ErrorCode.FILE_NOT_FOUND.getMsg());
             oos = new ObjectOutputStream(new FileOutputStream(file));
-            oos.writeObject(null);
+            oos.writeObject(null); // null 넣고 파일 만들어야지
             oos.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
-        // 파일 생성
-
-
-        // 파일 로드
 
     }
 
@@ -59,7 +54,14 @@ public class StudentInput {
         System.out.println(StudentText.PRINT_USAGE.getMsg());
     }
 
-    public static void checkKeyAndInputData() {
+    public static void checkKeyAndInputData() throws IOException {
+        System.out.print(StudentText.NAME.getMsg());
+        String name = br.readLine();
+        System.out.print(StudentText.NAME.getMsg());
+        String korean = br.readLine();
+        System.out.print(StudentText.NAME.getMsg());
+        System.out.print(StudentText.NAME.getMsg());
+        System.out.print(StudentText.NAME.getMsg());
 
     }
 
