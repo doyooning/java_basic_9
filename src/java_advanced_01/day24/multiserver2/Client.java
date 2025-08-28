@@ -1,4 +1,4 @@
-package java_advanced_01.day23.multiserver2;
+package java_advanced_01.day24.multiserver2;
 
 import java.io.*;
 import java.net.*;

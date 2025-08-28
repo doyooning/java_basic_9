@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class Client {
+public class ChatClient {
     private static final String host = "127.0.0.1";
     private static final int port = 5000;
 
@@ -17,37 +17,39 @@ public class Client {
              BufferedReader keyboard = new BufferedReader(
                      new InputStreamReader(System.in, StandardCharsets.UTF_8))
         ) {
-            // 접속 후 첫 메시지
-            System.out.println("NICK ");
+            // 닉네임 등록
+            System.out.print("NICK ");
             String str = keyboard.readLine();
-            System.out.println(str + " joined");
-            // 서버의 첫 인사 수신
-            String greet = br.readLine();
-            if (greet != null) System.out.println(greet);
-
-
+            pw.println(str);
+            pw.flush();
 
 
             // 채팅 입력
             String msg;
             while (true) {
-                System.out.print("You> ");
+                System.out.print("대화를 입력하세요> ");
                 msg = keyboard.readLine();
-                if (msg == null) break;   // EOF (Ctrl+D/Ctrl+Z)
-                pw.printf("[%s] %s\n", nickname, msg);
+                if (msg == null) {
+                    break;
+                } else if (msg == "") {
+                    System.out.println("ERROR: 다시 입력해 주십시오.");
+
+                } else {
+                    pw.println(msg);
+                } // EOF (Ctrl+D/Ctrl+Z)
 
                 String resp = br.readLine();
                 if (resp == null) {
-                    System.out.println("[Client] Server closed connection.");
+                    System.out.println("서버가 종료되었습니다.");
                     break;
                 }
                 System.out.println(resp);
 
-                if ("exit".equalsIgnoreCase(msg.trim())) break;
+                if ("quit".equalsIgnoreCase(msg.trim())) break;
             }
-            System.out.println("[Client] Bye.");
+            System.out.println("안녕히가십시오.");
         } catch (IOException e) {
-            System.err.println("[Client] Error: " + e.getMessage());
+            System.err.println("에러 : " + e.getMessage());
         }
 
     }

@@ -1,18 +1,18 @@
-package java_advanced_01.day24;
+package java_advanced_01.day24.multiserver2;
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class Server {
+public class MultiEchoServer {
     private static final int PORT = 5000;
     private static final ExecutorService POOL = Executors.newCachedThreadPool();
-    //
+    private static final AtomicInteger CLIENT_SEQ = new AtomicInteger(1);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         System.out.println("[Server] Starting on port " + PORT);
         // Ctrl+C 시 스레드 풀 정리
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -20,16 +20,13 @@ public class Server {
             POOL.shutdownNow();
         }));
 
-
-
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.println("[Server] Client " + nickname + " connected from " + socket.getRemoteSocketAddress());
-                POOL.submit(new Server.ClientHandler(socket, nickname));
-
+                int id = CLIENT_SEQ.getAndIncrement();
+                System.out.println("[Server] Client#" + id + " connected from " + socket.getRemoteSocketAddress());
+                POOL.submit(new ClientHandler(socket, id));
             }
-
         } catch (IOException e) {
             System.err.println("[Server] Error: " + e.getMessage());
         }
@@ -37,37 +34,37 @@ public class Server {
 
     private static class ClientHandler implements Runnable {
         private final Socket socket;
-        private final String nickname;
+        private final int clientId;
 
-        ClientHandler(Socket socket, String nickname) {
+        ClientHandler(Socket socket, int clientId) {
             this.socket = socket;
-            this.nickname = nickname;
+            this.clientId = clientId;
         }
 
         @Override
         public void run() {
             try (
-                    BufferedReader br = new BufferedReader(
+                    BufferedReader in = new BufferedReader(
                             new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
-                    PrintWriter pw = new PrintWriter(
+                    PrintWriter out = new PrintWriter(
                             new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true)
             ) {
-                pw.println("Welcome! You are Client#" + nickname + ". Type 'exit' to quit.");
+                out.println("Welcome! You are Client#" + clientId + ". Type 'exit' to quit.");
                 String line;
-                while ((line = br.readLine()) != null) {
-                    System.out.println("[Server] From Client#" + nickname + ": " + line);
+                while ((line = in.readLine()) != null) {
+                    System.out.println("[Server] From Client#" + clientId + ": " + line);
                     if ("exit".equalsIgnoreCase(line.trim())) {
-                        pw.println("Bye Client#" + nickname);
+                        out.println("Bye Client#" + clientId);
                         break;
                     }
                     // 받은 메시지를 그대로 돌려주는 에코
-                    pw.println("Echo to #" + nickname + ": " + line);
+                    out.println("Echo to #" + clientId + ": " + line);
                 }
             } catch (IOException e) {
-                System.err.println("[Server] Client#" + nickname + " I/O error: " + e.getMessage());
+                System.err.println("[Server] Client#" + clientId + " I/O error: " + e.getMessage());
             } finally {
                 try { socket.close(); } catch (IOException ignored) {}
-                System.out.println("[Server] Client#" + nickname + " disconnected.");
+                System.out.println("[Server] Client#" + clientId + " disconnected.");
             }
         }
     }
